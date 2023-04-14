@@ -24,4 +24,10 @@ public class UserServiceImp implements UserService {
     public void deleteUser(Long id){
         userJpaRepository.deleteById(id);
     }
+    public User editUser(User user){
+        return userJpaRepository.save(user);
+    }
+    public User getById(Long id){
+        return userJpaRepository.getById(id);
+    }
 }

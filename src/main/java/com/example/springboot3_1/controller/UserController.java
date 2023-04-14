@@ -23,7 +23,6 @@ public class UserController {
     @GetMapping("/")
     public String hello(Model model) {
         List<User> allUser=userService.getAll();
-        model.addAttribute("hello", "World Cup");
         model.addAttribute("users",allUser);
 
         return "index";
@@ -42,6 +41,17 @@ public class UserController {
     @GetMapping("/delete/{id}")
     public String deleteId(@PathVariable Long id) {
         userService.deleteUser(id);
+        return "redirect:/";
+    }
+    @GetMapping("/edit/{id}")
+    public String editUser(@PathVariable(value = "id") Long id,Model model) {
+        User user = userService.getById(id);
+        model.addAttribute("edituser",user);
+        return "edit";
+    }
+    @PostMapping("/edit")
+    public String editUserPost(User user){
+        userService.editUser(user);
         return "redirect:/";
     }
 }

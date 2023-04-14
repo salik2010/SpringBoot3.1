@@ -8,4 +8,6 @@ public interface UserService {
     public List<User> getAll();
     public void newUser(User user);
     public void deleteUser(Long id);
+    public User editUser(User user);
+    public User getById(Long id);
 }
