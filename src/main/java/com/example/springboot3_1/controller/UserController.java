@@ -2,15 +2,19 @@ package com.example.springboot3_1.controller;
 
 import com.example.springboot3_1.entity.User;
 import com.example.springboot3_1.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class UserController {
@@ -27,7 +31,7 @@ public class UserController {
 
         return "index";
     }
-    @GetMapping("/new")
+    @PutMapping("/new")
     public String newUser(Model model) {
         User user = new User();
         model.addAttribute("newuser",user);
@@ -38,12 +42,13 @@ public class UserController {
         userService.newUser(user);
         return "redirect:/";
     }
-    @GetMapping("/delete/{id}")
-    public String deleteId(@PathVariable Long id) {
+    //@GetMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
+    public String deleteId(@PathVariable("id") Long id) {
         userService.deleteUser(id);
         return "redirect:/";
     }
-    @GetMapping("/edit/{id}")
+    @PatchMapping("/edit/{id}")
     public String editUser(@PathVariable(value = "id") Long id,Model model) {
         User user = userService.getById(id);
         model.addAttribute("edituser",user);

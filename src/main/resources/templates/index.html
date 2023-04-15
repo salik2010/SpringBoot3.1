@@ -22,14 +22,13 @@
                 <td th:text="${user.address}"></td>
                 <td>
 
-                    <form th:action="@{'/delete/' + ${user.id}}" th:object="${user}">
+                    <form th:method="DELETE" th:action="@{'/delete/' + ${user.id}}" th:object="${user}">
                         <input type="hidden" name="id" th:value="${user.id}">
                         <button type="submit">Удалить</button>
                     </form>
                 </td>
                 <td>
-                    <form th:action="@{'/edit/' + ${user.id}}" th:object="${user}">
-
+                    <form th:method="PATCH" th:action="@{'/edit/' + ${user.id}}" th:object="${user}">
                         <button type="submit">Изменить</button>
                     </form>
                 </td>
@@ -38,7 +37,7 @@
         </table>
         <br>
 
-        <form th:action="@{/new/}" >
+        <form th:method="PUT" th:action="@{/new/}" >
 
             <button type="submit">Добавить пользователя</button>
         </form>
